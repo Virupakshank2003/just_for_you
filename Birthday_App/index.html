@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Hero Greeting -->
+  <header class="hero">
+    <h1>🎂 HAPPY BIRTHDAY 🎉</h1>
+    <p>Celebrate your special day with joy and laughter!</p>
+    <div id="audioControls" class="audio-controls">
+      <button id="toggleMusic" class="btn">Play Music</button>
+      <button id="muteMusic" class="btn">Mute</button>
+    </div>
+  </header>
+
+  <!-- Main greeting with name -->
+  <main class="main-greeting">
+    <h1 class="main-title">HAPPY BIRTHDAY, <span class="highlight">CHAITRA</span> 🎉</h1>
+  </main>
+
+  <!-- Curtain -->
+  <div class="curtain" id="curtain">
+    <button id="openCurtain">Open Curtain 🎭</button>
+  </div>
+
+  <!-- Big animated cake (drops when curtain opens) -->
+  <div id="bigCake" class="big-cake hidden" aria-hidden="true">🎂</div>
+
+  <!-- Age reveal animation -->
+  <div id="ageReveal" class="age-reveal hidden" aria-hidden="true">
+    <p class="age-label">She's Turning</p>
+    <div class="age-counter" id="ageCounter">0</div>
+  </div>
+
+  <!-- Name + Qualities -->
+  <section id="nameReveal" class="hidden">
+    <!-- heading moved to main-greeting -->
+    <div class="qualities">
+      <div class="card"><span>C</span><p>Creativity ✨</p></div>
+      <div class="card"><span>H</span><p>Honesty 💎</p></div>
+      <div class="card"><span>A</span><p>Affection ❤️</p></div>
+      <div class="card"><span>I</span><p>Inspiration 🌟</p></div>
+      <div class="card"><span>T</span><p>Talent 🎨</p></div>
+      <div class="card"><span>R</span><p>Radiance ☀️</p></div>
+      <div class="card"><span>A</span><p>Adventure 🌍</p></div>
+    </div>
+  </section>
+
+  <!-- Side-by-side Gallery (horizontal, scrollable) -->
+  <section id="sideBySideWrap" class="hidden">
+    <div class="side-by-side-gallery" id="sideBySideGallery" tabindex="0" aria-label="Photo gallery, scroll horizontally">
+      <!-- Images injected by script -->
+    </div>
+  </section>
+
+  <script>
+    window.SLIDESHOW_IMAGES = [
+      "assets/images/1.jpg",
+      "assets/images/2.jpg",
+      "assets/images/3.jpg",
+      "assets/images/4.jpg",
+      "assets/images/5.jpg",
+      "assets/images/6.jpg",
+      "assets/images/7.jpg",
+      "assets/images/8.jpg",
+      "assets/images/9.jpg",
+      "assets/images/10.jpg",
+      "assets/images/11.jpg",
+      "assets/images/12.jpg"
+    ];
+  </script>
+
+  <!-- Birthday Quote Section -->
+  <section id="quotes" class="hidden">
+    <h2>Birthday Quotes</h2>
+    <div class="quote-grid">
+      <div class="quote-card">“Count your life by smiles, not tears. Count your age by friends, not years.”</div>
+      <div class="quote-card">“Birthdays are nature’s way of telling us to eat more cake.”</div>
+      <div class="quote-card">“May your birthday be the start of a year filled with good luck, good health, and much happiness.”</div>
+      <div class="quote-card">“Another adventure-filled year awaits you. Happy Birthday!”</div>
+      
+    </div>    <button id="blowCandlesBtn" class="btn" style="margin-top: 20px;">🕯️ Blow Candles</button>  </section>
+
+  <!-- Surprise: Balloons and Cakes -->
+  <section id="surprise" class="hidden">
+    <div id="balloons" class="balloons" aria-hidden="true"></div>
+    <div id="cakes" class="cakes" aria-hidden="true"></div>
+  </section>
+
+  <!-- Interactive Surprise (ballo
+   ons auto) -->
+  <!-- <section id="surprise" class="hidden">
+    <h2>🎁 Surprise!</h2>
+    <div id="balloons" class="hidden"></div>
+  </section> -->
+  <!-- Personality Quiz -->
+  <section id="personalityQuiz" class="hidden">
+    <div class="quiz-container">
+      <h2>Discover Your Birthday Personality! ✨</h2>
+      <div class="quiz-progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div id="quizContent">
+        <!-- Quiz questions loaded by JavaScript -->
+      </div>
+      <button id="retakeQuizBtn" class="btn" style="display: none; margin-top: 20px;">🔄 Retake Quiz</button>
+    </div>
+  </section>
+
+  <!-- Birthday Fact Generator -->
+  <section id="factGenerator" class="hidden">
+    <h2>Did You Know? 🤔</h2>
+    <div class="fact-card">
+      <p id="factDisplay">Click to reveal an interesting fact!</p>
+    </div>
+    <button id="generateFactBtn" class="btn">✨ Generate New Fact</button>
+  </section>
+  <!-- Birthday Wishes Wall -->
+  <section id="wishes" class="hidden">
+    <h2>Birthday Wishes Wall</h2>
+    <div id="wishContainer">
+      <div class="wish-bubble">Wishing you endless happiness today! 🎂</div>
+      <div class="wish-bubble">May your year be filled with joy and success! 🌟</div>
+      <div class="wish-bubble">Celebrate big, laugh loud, love more! 🎉</div>
+      <div class="wish-bubble">Here’s to another year of wonderful adventures! ✈️</div>
+    </div>
+  </section>
+  
+  <!-- (Removed upload/gallery slideshow section) -->
+
+  <!-- Footer Section -->
+  <footer>
+    <p>Made with love 🎂 — Your Birthday Wish App</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
