@@ -3,8 +3,8 @@ document.getElementById("openCurtain").addEventListener("click", function() {
   const curtain = document.getElementById("curtain");
   // start surprise effects immediately
   try { startSurpriseEffects(10000); } catch (e) {}
-  // start music on user click (if not muted)
-  try { if (!isMuted) togglePlayMusic(true); } catch (e) {}
+  // start music on user click
+  try { togglePlayMusic(true); } catch (e) {}
   // drop the big cake
   try { dropBigCake(); } catch (e) {}
   curtain.style.transition = "all 2s ease";
@@ -18,7 +18,6 @@ document.getElementById("openCurtain").addEventListener("click", function() {
     show("quotes");
     show("wishes");
     show("loveReasons");
-    show("miniGame");
     show("storybook");
     show("autoSlideWrap");
     show("personalityQuiz");
@@ -177,7 +176,6 @@ function createQuoteSparkle(container) {
 // --- WebAudio Happy Birthday synth ---
 let audioCtx = null;
 let musicPlaying = false;
-let isMuted = false;
 let musicTimeouts = [];
 let analyser = null;
 let masterGain = null;
@@ -245,7 +243,6 @@ function clearMusicTimeouts() {
 }
 
 function togglePlayMusic(forcePlay=false) {
-  if (isMuted) return;
   if (musicPlaying && !forcePlay) {
     // just stop
     clearMusicTimeouts();
@@ -262,11 +259,6 @@ function togglePlayMusic(forcePlay=false) {
 }
 
 document.getElementById('toggleMusic')?.addEventListener('click', () => togglePlayMusic());
-document.getElementById('muteMusic')?.addEventListener('click', () => {
-  isMuted = !isMuted;
-  document.getElementById('muteMusic').textContent = isMuted ? 'Unmute' : 'Mute';
-  if (isMuted) { clearMusicTimeouts(); musicPlaying = false; document.getElementById('toggleMusic').textContent = 'Play Music'; }
-});
 document.getElementById('toggleViz')?.addEventListener('click', () => {
   const el = document.getElementById('musicViz');
   if (!el) return;
@@ -343,38 +335,21 @@ document.getElementById('blowCandlesBtn')?.addEventListener('click', blowCandles
 
 // --- Birthday Fact Generator ---
 const BIRTHDAY_FACTS = [
-  // About June 23
-  "📅 June 23rd is just days after the Summer Solstice - still the season of growth and light!",
-  "♋ People born on June 23rd are Cancers - known for being caring, intuitive, and deeply emotional.",
-  "🌙 Cancer is ruled by the Moon, the planet of emotions, intuition, and inner wisdom.",
-  "🎂 June 23rd birthdays celebrate in early summer - a time of warmth and new adventures!",
-  "✨ June 23, 2003 was a Thursday - a powerful day for new beginnings!",
-  
-  // About age 23
-  "💫 23 is a prime number - special and indivisible!",
-  "🧠 At 23, the prefrontal cortex (decision-making part of the brain) is fully developed.",
-  "💪 23 is considered the prime age for athletic performance - strong, experienced, and energetic!",
-  "🏀 Michael Jordan wore #23 - one of the greatest athletes of all time!",
-  "🔬 23 pairs of chromosomes make up human DNA - you're a perfect genetic match!",
-  
-  // Fun celebratory facts
-  "🎉 The word 'birthday' comes from ancient times when people believed birthdays were spiritually significant.",
-  "🕯️ Blowing out candles is believed to have originated from ancient Greek moon goddess celebrations.",
-  "🎁 The most common birthday gift is money - but thoughtful gifts mean so much more!",
-  "🎂 The average person spends $70-$100 on birthday celebrations per year.",
-  "🌟 Every second, around 188 people celebrate their birthday worldwide!",
-  
-  // Chaitra-specific facts
-  "🎨 Your name Chaitra means 'Spring' in Sanskrit - symbolizing new beginnings and renewal!",
-  "🌸 Spring represents growth, energy, and the beauty of fresh starts.",
-  "♋ As a Cancer, you're known for being protective, loyal, and deeply caring of loved ones.",
-  "💎 Pearls are the birthstone for June - symbolizing purity and wisdom.",
-  "🌹 June flowers are roses and honeysuckle - representing love and sweetness.",
-  "🔮 Cancers are natural nurturers with incredible emotional intelligence and empathy!",
-  "🌊 Your zodiac element is Water - representing flow, adaptability, and emotional depth.",
-  "💝 Born in 2003, you're Gen Z - creative, tech-savvy, and socially conscious!",
-  "🎯 23 is the perfect age to chase dreams with wisdom gained from 23 years of experiences.",
-  "🎪 You've lived through 23 years of incredible growth, learning, and unforgettable moments!"
+  "📅 June 23rd sits just after the Summer Solstice, making it one of the brightest days of the year.",
+  "♋ June 23 birthdays belong to Cancer, a sign known for deep feeling, loyalty, and warmth.",
+  "🎂 June 23, 2003 was a Monday, a fresh new week for a beautiful new life.",
+  "✨ 23 is a prime number, just like the special year you were born.",
+  "🔬 Humans have 23 pairs of chromosomes, a perfect connection of life and love.",
+  "🏀 23 is iconic in sports and life — a number tied to greatness and bold energy.",
+  "🎉 At age 23, the world feels wide open and full of possibility.",
+  "🧠 By 23, your brain has finished maturing its decision-making center — a brilliant year for wisdom.",
+  "🌸 June is a month of roses and honeysuckle, just like the sweetness of your birthday.",
+  "💎 Pearls are June's birthstone, representing purity and timeless beauty — like you.",
+  "🌙 Cancer is ruled by the Moon, giving June 23 birthdays a special emotional glow.",
+  "🌊 Water signs like Cancer are intuitive and flowing — and 23 feels like a perfect wave.",
+  "🎶 2003 was a year full of memorable music, just like today is full of memorable wishes.",
+  "📖 Turning 23 on June 23 makes your story beautifully synced with the calendar.",
+  "🌟 Being born in 2003 means you grew up with fresh energy, creativity, and online dreams.",
 ];
 
 let factIndex = 0;
@@ -443,10 +418,10 @@ function narrateStory() {
   const data = STORY_PAGES[storyIndex];
   const utter = new SpeechSynthesisUtterance(`${data.title}. ${data.text}`);
   utter.rate = 1.02; utter.pitch = 1;
-  utter.onend = () => { document.getElementById('storyNarrate').textContent = '🔊 Narrate'; };
+  utter.onend = () => { const narrateBtn = document.getElementById('storyNarrate'); if (narrateBtn) narrateBtn.textContent = '🔊 Narrate'; };
   storyUtterance = utter;
   window.speechSynthesis.speak(utter);
-  document.getElementById('storyNarrate').textContent = '⏸ Stop';
+  const narrateBtn = document.getElementById('storyNarrate'); if (narrateBtn) narrateBtn.textContent = '⏸ Stop';
 }
 
 function stopNarration() {
@@ -455,9 +430,6 @@ function stopNarration() {
 
 document.getElementById('storyNext')?.addEventListener('click', () => { nextStory(); });
 document.getElementById('storyPrev')?.addEventListener('click', () => { prevStory(); });
-document.getElementById('storyNarrate')?.addEventListener('click', () => {
-  if (storyUtterance) stopNarration(); else narrateStory();
-});
 
 // keyboard navigation
 window.addEventListener('keydown', (e) => {
@@ -703,98 +675,6 @@ function hideEggModal() {
 
 // initialize after DOM ready
 window.addEventListener('load', () => { initEasterEggs(); });
-
-// --- Mini-game: Pop the Balloons ---
-let gameInterval = null;
-let gameSpawnInterval = null;
-let gameTimeLeft = 30;
-let gameScore = 0;
-
-function startGame() {
-  const timerEl = document.getElementById('gameTimer');
-  const scoreEl = document.getElementById('gameScore');
-  const startBtn = document.getElementById('startGameBtn');
-  const resetBtn = document.getElementById('resetGameBtn');
-  const area = document.getElementById('gameArea');
-  if (!timerEl || !scoreEl || !startBtn || !area) return;
-
-  // reset
-  clearInterval(gameInterval); clearInterval(gameSpawnInterval);
-  area.innerHTML = '';
-  gameTimeLeft = 30; gameScore = 0; scoreEl.textContent = '0'; timerEl.textContent = String(gameTimeLeft);
-  startBtn.style.display = 'none'; resetBtn.style.display = 'none';
-
-  // spawn balloons
-  // spawn slower so balloons don't overcrowd when they rise slowly
-  gameSpawnInterval = setInterval(() => spawnGameBalloon(area), 1500);
-  // game timer
-  gameInterval = setInterval(() => {
-    gameTimeLeft -= 1;
-    timerEl.textContent = String(gameTimeLeft);
-    if (gameTimeLeft <= 0) endGame();
-  }, 1000);
-}
-
-function spawnGameBalloon(area) {
-  const b = document.createElement('div');
-  b.className = 'game-balloon';
-  // random color
-  const colors = ['#ff6f61','#ffd700','#6a0572','#00bfff','#ff94b9'];
-  const color = colors[Math.floor(Math.random()*colors.length)];
-  b.style.background = `radial-gradient(circle at 30% 30%, #fff, ${color})`;
-  const left = Math.random() * 86; // leave margin
-  b.style.left = left + '%';
-  b.style.bottom = '-120px';
-  b.innerHTML = '🎈<div class="string"></div>';
-  area.appendChild(b);
-
-  // animate rise
-  // make balloons rise much slower (longer duration)
-  const rise = 18 + Math.random()*12; // seconds (18-30s)
-  b.animate([{ transform: 'translateY(0)' }, { transform: `translateY(-${rise*100}vh)` }], { duration: rise*1000, easing: 'linear' });
-
-  const popHandler = (e) => {
-    e.stopPropagation();
-    popBalloon(b);
-  };
-  b.addEventListener('click', popHandler);
-
-  // remove after animation ends
-  setTimeout(() => { if (b.parentNode) b.remove(); }, (rise*1000)+600);
-}
-
-function popBalloon(b) {
-  if (!b) return;
-  // prevent double pop
-  if (b.classList.contains('pop')) return;
-  b.classList.add('pop');
-  gameScore += 1;
-  document.getElementById('gameScore').textContent = String(gameScore);
-  // small pop effect: confetti
-  try { emitCakeConfetti(6); } catch (e) {}
-  setTimeout(() => { if (b.parentNode) b.remove(); }, 350);
-}
-
-function endGame() {
-  clearInterval(gameInterval); clearInterval(gameSpawnInterval);
-  gameInterval = null; gameSpawnInterval = null;
-  document.getElementById('startGameBtn').style.display = 'inline-block';
-  document.getElementById('resetGameBtn').style.display = 'inline-block';
-  // big confetti for result
-  try { emitCakeConfetti(30); } catch (e) {}
-  const area = document.getElementById('gameArea');
-  if (area) {
-    const msg = document.createElement('div');
-    msg.className = 'game-result';
-    msg.textContent = `Time's up! You popped ${gameScore} balloons.`;
-    msg.style.position = 'absolute'; msg.style.left='50%'; msg.style.top='40%'; msg.style.transform='translate(-50%,-50%)'; msg.style.background='rgba(255,255,255,0.9)'; msg.style.padding='14px 18px'; msg.style.borderRadius='12px'; msg.style.boxShadow='0 10px 30px rgba(106,5,114,0.08)';
-    area.appendChild(msg);
-    setTimeout(() => { if (msg.parentNode) msg.remove(); }, 4500);
-  }
-}
-
-document.getElementById('startGameBtn')?.addEventListener('click', startGame);
-document.getElementById('resetGameBtn')?.addEventListener('click', () => { document.getElementById('gameArea').innerHTML=''; document.getElementById('gameScore').textContent='0'; document.getElementById('gameTimer').textContent='30'; document.getElementById('resetGameBtn').style.display='none'; });
 
 // --- Visualizer drawing ---
 function startVisualizer() {

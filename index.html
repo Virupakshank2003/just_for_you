@@ -15,7 +15,6 @@
     <p>Celebrate your special day with joy and laughter!</p>
     <div id="audioControls" class="audio-controls">
       <button id="toggleMusic" class="btn">Play Music</button>
-      <button id="muteMusic" class="btn">Mute</button>
       <button id="toggleViz" class="btn">Visualizer</button>
       <button id="jumpStoryBtn" class="btn">Storybook</button>
     </div>
@@ -100,28 +99,27 @@
       <div class="quote-card">“May your birthday be the start of a year filled with good luck, good health, and much happiness.”</div>
       <div class="quote-card">“Another adventure-filled year awaits you. Happy Birthday!”</div>
       
-    </div>    <button id="blowCandlesBtn" class="btn" style="margin-top: 20px;">🕯️ Blow Candles</button>  </section>
+    </div>    <button id="blowCandlesBtn" class="btn" style="margin-top: 20px;">🕯️ Blow Candles</button>
+  </section>
+
+  <!-- 23 Reasons We Love You -->
+  <section id="loveReasons" class="hidden">
+    <div class="reason-container">
+      <h2>23 Reasons We Love You</h2>
+      <div id="reasonCard" class="reason-card">Tap the button below to reveal a reason why Chaitra is so special.</div>
+      <div class="reason-actions">
+        <button id="revealReasonBtn" class="btn">Reveal a Reason</button>
+        <button id="resetReasonsBtn" class="btn" style="display:none;">Start Over</button>
+      </div>
+      <div id="reasonProgress" class="reason-progress"><span id="reasonCounter">0</span>/23 revealed</div>
+    </div>
+  </section>
 
   <!-- Surprise: Balloons and Cakes -->
   <section id="surprise" class="hidden">
     <div id="balloons" class="balloons" aria-hidden="true"></div>
     <div id="cakes" class="cakes" aria-hidden="true"></div>
   </section>
-
-  <!-- Mini Game: Pop the Balloons -->
-  <section id="miniGame" class="hidden">
-    <div class="game-container">
-      <h2>Pop the Balloons 🎈</h2>
-      <p>Pop as many balloons as you can in <strong><span id="gameTimer">30</span>s</strong> — click balloons to pop!</p>
-      <div class="game-controls">
-        <button id="startGameBtn" class="btn">Start Game</button>
-        <button id="resetGameBtn" class="btn" style="display:none;">Reset</button>
-        <div class="game-score">Score: <span id="gameScore">0</span></div>
-      </div>
-      <div id="gameArea" class="game-area" aria-live="polite"></div>
-    </div>
-  </section>
-  
 
   <!-- Interactive Surprise (ballo
    ons auto) -->
@@ -161,19 +159,6 @@
       <div class="wish-bubble">Here’s to another year of wonderful adventures! ✈️</div>
     </div>
   </section>
-
-  <!-- 23 Reasons We Love You -->
-  <section id="loveReasons" class="hidden">
-    <div class="reason-container">
-      <h2>23 Reasons We Love You</h2>
-      <div id="reasonCard" class="reason-card">Tap the button below to reveal a reason why Chaitra is so special.</div>
-      <div class="reason-actions">
-        <button id="revealReasonBtn" class="btn">Reveal a Reason</button>
-        <button id="resetReasonsBtn" class="btn" style="display:none;">Start Over</button>
-      </div>
-      <div id="reasonProgress" class="reason-progress"><span id="reasonCounter">0</span>/23 revealed</div>
-    </div>
-  </section>
   
   <!-- (Removed upload/gallery slideshow section) -->
 
@@ -188,7 +173,6 @@
         <button id="storyPrev" class="btn">◀ Prev</button>
         <div class="story-meta">Page <span id="storyIndex">1</span>/<span id="storyTotal">1</span></div>
         <button id="storyNext" class="btn">Next ▶</button>
-        <button id="storyNarrate" class="btn">🔊 Narrate</button>
       </div>
     </div>
   </section>
